@@ -19,42 +19,36 @@
         .avatar {
             width: 200px;
             height: 200px;
-            border-radius: 50%;
-            display: inline-block;
-            position: relative;
+            border-radius: 10%;
+            background-color: #3498db;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
             margin-bottom: 20px;
         }
-        .avatar span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 48px;
-            font-weight: bold;
-        }
         .color-picker {
-            margin: 10px;
-        }
-        .export-btn {
-            margin-top: 20px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="avatar-generator">
-        <div class="avatar" id="avatar" style="background-color: #3498db;">
-            <span id="text">A</span>
+        <div class="avatar" id="avatar">obscure freeman</div>
+        <div class="color-picker">
+            <label for="bgColor">背景颜色:</label>
+            <input type="color" id="bgColor" value="#3498db">
         </div>
-        <label for="bgColor">背景颜色:</label>
-        <input type="color" id="bgColor" class="color-picker" value="#3498db">
-        <label for="textColor">文字颜色:</label>
-        <input type="color" id="textColor" class="color-picker" value="#ffffff">
-        <button class="export-btn" id="exportBtn">导出头像</button>
+        <div class="color-picker">
+            <label for="textColor">文字颜色:</label>
+            <input type="color" id="textColor" value="#fff">
+        </div>
+        <button id="exportBtn">导出头像</button>
     </div>
 
     <script>
         const avatar = document.getElementById('avatar');
-        const text = document.getElementById('text');
         const bgColorInput = document.getElementById('bgColor');
         const textColorInput = document.getElementById('textColor');
         const exportBtn = document.getElementById('exportBtn');
@@ -64,7 +58,7 @@
         });
 
         textColorInput.addEventListener('input', function() {
-            text.style.color = this.value;
+            avatar.style.color = this.value;
         });
 
         exportBtn.addEventListener('click', function() {
@@ -73,15 +67,14 @@
             canvas.height = 1920;
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = avatar.style.backgroundColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, 1920, 1920);
+            ctx.fillStyle = avatar.style.color;
             ctx.font = 'bold 960px Arial';
-            ctx.fillStyle = text.style.color;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText(text.textContent, canvas.width / 2, canvas.height / 2);
-            const dataURL = canvas.toDataURL('image/png');
+            ctx.fillText(avatar.textContent, 960, 960);
             const link = document.createElement('a');
-            link.href = dataURL;
+            link.href = canvas.toDataURL();
             link.download = 'avatar.png';
             link.click();
         });
