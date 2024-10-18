@@ -27,6 +27,8 @@
             align-items: center;
             font-size: 48px;
             margin-bottom: 20px;
+            line-height: 1.2; 
+            white-space: pre-line;
         }
         .color-picker {
             margin-bottom: 10px;
@@ -35,7 +37,7 @@
 </head>
 <body>
     <div class="avatar-generator">
-        <div class="avatar" id="avatar">obscure freeman</div>
+        <div class="avatar" id="avatar">obscure<br>freeman</div>
         <div class="color-picker">
             <label for="bgColor">背景颜色:</label>
             <input type="color" id="bgColor" value="#3498db">
@@ -48,36 +50,42 @@
     </div>
 
     <script>
-        const avatar = document.getElementById('avatar');
-        const bgColorInput = document.getElementById('bgColor');
-        const textColorInput = document.getElementById('textColor');
-        const exportBtn = document.getElementById('exportBtn');
+        const bgColorPicker = document.querySelector("#bgColor");
+        const textColorPicker = document.querySelector("#textColor");
 
-        bgColorInput.addEventListener('input', function() {
-            avatar.style.backgroundColor = this.value;
+        let bgColor = bgColorPicker.value;
+        let textColor = textColorPicker.value;
+
+        const avatar = document.querySelector("#avatar");
+
+        avatar.style.backgroundColor = bgColor;
+        avatar.style.color = textColor;
+
+        const exportBtn = document.querySelector("#exportBtn");
+
+        exportBtn.addEventListener("click", function() {
+        const canvas = document.createElement("canvas");
+        canvas.width = 200;
+        canvas.height = 200;
+
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.font = "48px Arial";
+        ctx.fillStyle = textColor;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("obscure freeman", canvas.width / 2, canvas.height / 2);
+
+        const dataURL = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = dataURL;
+        link.download = "avatar.png";
+        link.click();
         });
 
-        textColorInput.addEventListener('input', function() {
-            avatar.style.color = this.value;
-        });
 
-        exportBtn.addEventListener('click', function() {
-            const canvas = document.createElement('canvas');
-            canvas.width = 1920;
-            canvas.height = 1920;
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = avatar.style.backgroundColor;
-            ctx.fillRect(0, 0, 1920, 1920);
-            ctx.fillStyle = avatar.style.color;
-            ctx.font = 'bold 960px Arial';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(avatar.textContent, 960, 960);
-            const link = document.createElement('a');
-            link.href = canvas.toDataURL();
-            link.download = 'avatar.png';
-            link.click();
-        });
     </script>
 </body>
 </html>
