@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>头像生成器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .avatar-generator {
+            text-align: center;
+        }
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .avatar span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            font-weight: bold;
+        }
+        .color-picker {
+            margin: 10px;
+        }
+        .export-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="avatar-generator">
+        <div class="avatar" id="avatar" style="background-color: #3498db;">
+            <span id="text">A</span>
+        </div>
+        <label for="bgColor">背景颜色:</label>
+        <input type="color" id="bgColor" class="color-picker" value="#3498db">
+        <label for="textColor">文字颜色:</label>
+        <input type="color" id="textColor" class="color-picker" value="#ffffff">
+        <button class="export-btn" id="exportBtn">导出头像</button>
+    </div>
+
+    <script>
+        const avatar = document.getElementById('avatar');
+        const text = document.getElementById('text');
+        const bgColorInput = document.getElementById('bgColor');
+        const textColorInput = document.getElementById('textColor');
+        const exportBtn = document.getElementById('exportBtn');
+
+        bgColorInput.addEventListener('input', function() {
+            avatar.style.backgroundColor = this.value;
+        });
+
+        textColorInput.addEventListener('input', function() {
+            text.style.color = this.value;
+        });
+
+        exportBtn.addEventListener('click', function() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1920;
+            canvas.height = 1920;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = avatar.style.backgroundColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = 'bold 960px Arial';
+            ctx.fillStyle = text.style.color;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text.textContent, canvas.width / 2, canvas.height / 2);
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = dataURL;
+            link.download = 'avatar.png';
+            link.click();
+        });
+    </script>
+</body>
+</html>
