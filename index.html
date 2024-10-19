@@ -63,6 +63,16 @@
         avatar.style.backgroundColor = bgColor;
         avatar.style.color = textColor;
 
+        bgColorPicker.addEventListener('input', function() {
+            bgColor = this.value;
+            avatar.style.backgroundColor = bgColor;
+        });
+
+        textColorPicker.addEventListener('input', function() {
+            textColor = this.value;
+            avatar.style.color = textColor;
+        });
+
         const exportBtn = document.querySelector("#exportBtn");
 
         exportBtn.addEventListener("click", function() {
@@ -89,8 +99,6 @@
             link.download = "avatar.png";
             link.click();
         });
-
-
     </script>
 </body>
 </html>
