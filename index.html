@@ -124,14 +124,6 @@
             <label for="bgColor">背景颜色:</label>
             <input type="color" id="bgColor" value="#1ccc5b">
         </div>
-        <div class="color-picker" id="textColorPicker">
-            <label for="textColor">文字颜色:</label>
-            <input type="color" id="textColor" value="#000000">
-        </div>
-        <div class="color-picker">
-            <label for="autoTextColor">自动文字颜色:</label>
-            <input type="checkbox" id="autoTextColor">
-        </div>
         <div class="export-options">
             <label for="exportFormat">导出格式:</label>
             <select id="exportFormat">
@@ -144,44 +136,19 @@
 
     <script>
         const bgColorPicker = document.querySelector("#bgColor");
-        const textColorPicker = document.querySelector("#textColor");
-        const autoTextColorCheckbox = document.querySelector("#autoTextColor");
         const exportFormatSelect = document.querySelector("#exportFormat");
-        // const exportBtn = document.querySelector("#exportBtn");
         const avatar = document.querySelector("#avatar");
-        const textColorPickerDiv = document.querySelector("#textColorPicker");
 
         let bgColor = bgColorPicker.value;
-        let textColor = textColorPicker.value;
 
         avatar.style.backgroundColor = bgColor;
-        avatar.style.color = textColor;
         // exportBtn.style.backgroundColor = bgColor;
-        // exportBtn.style.color = textColor;
 
         bgColorPicker.addEventListener('input', function() {
             bgColor = this.value;
             avatar.style.backgroundColor = bgColor;
-            if (autoTextColorCheckbox.checked) {
-                updateTextColor();
-            }
+            updateTextColor();
             // exportBtn.style.backgroundColor = bgColor;
-        });
-
-        textColorPicker.addEventListener('input', function() {
-            textColor = this.value;
-            avatar.style.color = textColor;
-            // exportBtn.style.color = textColor;
-        });
-
-        autoTextColorCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                textColorPickerDiv.classList.add("hidden");
-                updateTextColor();
-            } else {
-                textColorPickerDiv.classList.remove("hidden");
-                avatar.style.color = textColorPicker.value;
-            }
         });
 
         function updateTextColor() {
