@@ -53,8 +53,35 @@
         .color-picker {
             margin-bottom: 10px;
         }
+        .color-picker input[type="color"] {
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         .export-options {
             margin-bottom: 10px;
+        }
+        .export-options select {
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #exportBtn {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        #exportBtn:hover {
+            background-color: #0047b3;
+        }
+
+        #exportBtn:active {
+            transform: scale(0.98);
         }
         @font-face {
             font-family: 'jammono';
