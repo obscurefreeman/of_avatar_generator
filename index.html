@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>头像生成器</title>
     <style>
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: jammono;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,13 +26,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 36px;
+            font-size: 42px;
             margin-bottom: 20px;
-            /* line-height: 1.2; 
-            white-space: pre-line; */
+            line-height: 0.9; 
         }
         .color-picker {
             margin-bottom: 10px;
+        }
+        @font-face {
+            font-family: 'jammono';
+            src: url('assets/fonts/Jam Mono.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
     </style>
 </head>
@@ -84,10 +90,11 @@
             ctx.fillStyle = bgColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.font = "36px Arial";
+            ctx.font = "42px jammono";
             ctx.fillStyle = textColor;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
+            ctx.lineWidth = 0.9;
             const lines = ["obscure", "freeman"];
             lines.forEach((line, index) => {
                 ctx.fillText(line, canvas.width / 2, canvas.height / 2 + (index - 0.5) * 48);
