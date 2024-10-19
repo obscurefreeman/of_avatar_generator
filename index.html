@@ -13,7 +13,17 @@
             height: 100vh;
             background-color: #252525;
             color: #fff;
+            overflow: hidden; /* 隐藏页面溢出部分 */
         }
+
+        /* 添加动态背景 */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+        }
+
         .avatar-generator {
             text-align: center;
             justify-content: center;
@@ -23,6 +33,8 @@
             width: 60%;
             display: flex;
             background-color: #171717;
+            position: relative; /* 相对定位，使粒子效果覆盖在此容器上 */
+            z-index: 1; /* 确保此容器在粒子效果之上 */
         }
         .avatar {
             width: 200px;
@@ -93,6 +105,11 @@
         }
     </style>
 </head>
+
+<div id="particles-js"></div>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="script.js"></script>
+
 <body>
     <div class="avatar-generator">
         <div class="avatar" id="avatar">
@@ -175,6 +192,8 @@
             link.download = "avatar." + exportFormatSelect.value.split('/')[1];
             link.click();
         }
+
+        
     </script>
 </body>
 </html>
