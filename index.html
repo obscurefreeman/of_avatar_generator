@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>头像生成器</title>
     <style>
-
         body {
             font-family: jammono;
             display: flex;
@@ -17,14 +16,13 @@
         }
         .avatar-generator {
             text-align: center;
-            /* padding-top: 100px; */
             justify-content: center;
             align-items: center;
             height: 100vh;
             flex-direction: column;
             width: 60%;
             display: flex;
-            background-color: #171717
+            background-color: #171717;
         }
         .avatar {
             width: 200px;
@@ -37,29 +35,22 @@
             align-items: center;
             font-size: 42px;
             margin-bottom: 40px;
-            line-height: 0.9; 
-            /* align-items: flex-start; */
-            /* padding-top: 10px; */
-            /* position: relative; */
-            /* top: 66.67px; */
-            
+            line-height: 0.9;
             padding-bottom: 10px;
             transition: transform 0.3s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            user-select: none; /* 禁止选择 */
+            -webkit-user-select: none;
+            cursor: pointer;
         }
         .avatar:hover {
             transform: scale(1.1) rotate(1deg);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
         .avatar:active {
-            transform: scale(0.95); /* 鼠标点击时缩小 */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 鼠标点击时的投影 */
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        /* .avatar::before {
-            content: "obscure\nfreeman";
-            top: 10px;
-            justify-content: center;
-        } */
         .color-picker {
             margin-bottom: 10px;
         }
@@ -91,7 +82,6 @@
             background-color: #138d3e;
             transform: scale(1.1);
         }
-
         #exportBtn:active {
             transform: scale(0.98);
         }
@@ -130,34 +120,38 @@
         const bgColorPicker = document.querySelector("#bgColor");
         const textColorPicker = document.querySelector("#textColor");
         const exportFormatSelect = document.querySelector("#exportFormat");
-        const exportBtn = document.querySelector("#exportBtn");// 按钮的颜色与背景颜色一致
+        const exportBtn = document.querySelector("#exportBtn");
+        const avatar = document.querySelector("#avatar");
 
         let bgColor = bgColorPicker.value;
         let textColor = textColorPicker.value;
 
-        const avatar = document.querySelector("#avatar");
-
         avatar.style.backgroundColor = bgColor;
         avatar.style.color = textColor;
-        exportBtn.style.backgroundColor = bgColor;// 按钮的颜色与背景颜色一致
+        exportBtn.style.backgroundColor = bgColor;
         exportBtn.style.color = textColor;
 
         bgColorPicker.addEventListener('input', function() {
             bgColor = this.value;
             avatar.style.backgroundColor = bgColor;
-            exportBtn.style.backgroundColor = bgColor; //监听1
+            exportBtn.style.backgroundColor = bgColor;
         });
 
         textColorPicker.addEventListener('input', function() {
             textColor = this.value;
             avatar.style.color = textColor;
-            exportBtn.style.color = textColor; //监听2
+            exportBtn.style.color = textColor;
         });
-        
-
-        
 
         exportBtn.addEventListener("click", function() {
+            exportAvatar();
+        });
+
+        avatar.addEventListener("click", function() {
+            exportAvatar();
+        });
+
+        function exportAvatar() {
             const canvas = document.createElement("canvas");
             canvas.width = 200;
             canvas.height = 200;
@@ -170,7 +164,6 @@
             ctx.fillStyle = textColor;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            // ctx.lineWidth = 0.9;
             const lines = ["obscure", "freeman"];
             lines.forEach((line, index) => {
                 ctx.fillText(line, canvas.width / 2, canvas.height / 2 + (index - 0.5) * 36 - 3);
@@ -181,7 +174,7 @@
             link.href = dataURL;
             link.download = "avatar." + exportFormatSelect.value.split('/')[1];
             link.click();
-        });
+        }
     </script>
 </body>
 </html>
