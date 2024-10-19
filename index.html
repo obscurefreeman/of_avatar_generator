@@ -113,14 +113,14 @@
                 <option value="image/jpeg">JPEG</option>
             </select>
         </div>
-        <button id="exportBtn">导出头像</button>
+        <!-- <button id="exportBtn">导出头像</button> -->
     </div>
 
     <script>
         const bgColorPicker = document.querySelector("#bgColor");
         const textColorPicker = document.querySelector("#textColor");
         const exportFormatSelect = document.querySelector("#exportFormat");
-        const exportBtn = document.querySelector("#exportBtn");
+        // const exportBtn = document.querySelector("#exportBtn");
         const avatar = document.querySelector("#avatar");
 
         let bgColor = bgColorPicker.value;
@@ -128,24 +128,24 @@
 
         avatar.style.backgroundColor = bgColor;
         avatar.style.color = textColor;
-        exportBtn.style.backgroundColor = bgColor;
-        exportBtn.style.color = textColor;
+        // exportBtn.style.backgroundColor = bgColor;
+        // exportBtn.style.color = textColor;
 
         bgColorPicker.addEventListener('input', function() {
             bgColor = this.value;
             avatar.style.backgroundColor = bgColor;
-            exportBtn.style.backgroundColor = bgColor;
+            // exportBtn.style.backgroundColor = bgColor;
         });
 
         textColorPicker.addEventListener('input', function() {
             textColor = this.value;
             avatar.style.color = textColor;
-            exportBtn.style.color = textColor;
+            // exportBtn.style.color = textColor;
         });
 
-        exportBtn.addEventListener("click", function() {
-            exportAvatar();
-        });
+        // exportBtn.addEventListener("click", function() {
+        //     exportAvatar();
+        // });
 
         avatar.addEventListener("click", function() {
             exportAvatar();
