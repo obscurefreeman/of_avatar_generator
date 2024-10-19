@@ -53,6 +53,9 @@
         .color-picker {
             margin-bottom: 10px;
         }
+        .export-options {
+            margin-bottom: 10px;
+        }
         @font-face {
             font-family: 'jammono';
             src: url('assets/fonts/Jam Mono.ttf') format('truetype');
@@ -74,12 +77,20 @@
             <label for="textColor">文字颜色:</label>
             <input type="color" id="textColor" value="#000000">
         </div>
+        <div class="export-options">
+            <label for="exportFormat">导出格式:</label>
+            <select id="exportFormat">
+                <option value="image/png">PNG</option>
+                <option value="image/jpeg">JPEG</option>
+            </select>
+        </div>
         <button id="exportBtn">导出头像</button>
     </div>
 
     <script>
         const bgColorPicker = document.querySelector("#bgColor");
         const textColorPicker = document.querySelector("#textColor");
+        const exportFormatSelect = document.querySelector("#exportFormat");
 
         let bgColor = bgColorPicker.value;
         let textColor = textColorPicker.value;
@@ -120,10 +131,10 @@
                 ctx.fillText(line, canvas.width / 2, canvas.height / 2 + (index - 0.5) * 36 - 3);
             });
 
-            const dataURL = canvas.toDataURL("image/png");
+            const dataURL = canvas.toDataURL(exportFormatSelect.value);
             const link = document.createElement("a");
             link.href = dataURL;
-            link.download = "avatar.png";
+            link.download = "avatar." + exportFormatSelect.value.split('/')[1];
             link.click();
         });
     </script>
