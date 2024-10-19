@@ -20,12 +20,12 @@
             width: 200px;
             height: 200px;
             border-radius: 10%;
-            background-color: #3498db;
-            color: #fff;
+            background-color: #1ccc5b;
+            color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 48px;
+            font-size: 36px;
             margin-bottom: 20px;
             /* line-height: 1.2; 
             white-space: pre-line; */
@@ -42,11 +42,11 @@
         </div>
         <div class="color-picker">
             <label for="bgColor">背景颜色:</label>
-            <input type="color" id="bgColor" value="#3498db">
+            <input type="color" id="bgColor" value="#1ccc5b">
         </div>
         <div class="color-picker">
             <label for="textColor">文字颜色:</label>
-            <input type="color" id="textColor" value="#fff">
+            <input type="color" id="textColor" value="#000">
         </div>
         <button id="exportBtn">导出头像</button>
     </div>
@@ -84,7 +84,7 @@
             ctx.fillStyle = bgColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.font = "48px Arial";
+            ctx.font = "36px Arial";
             ctx.fillStyle = textColor;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
