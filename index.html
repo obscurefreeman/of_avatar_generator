@@ -32,9 +32,11 @@
             width: 50%;
             min-width: 500px;
             display: flex;
-            background-color: #171717;
+            background-color: #1616164e;
             position: relative;
             z-index: 1;
+            /* backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); */
         }
         .avatar {
             width: 200px;
@@ -103,6 +105,9 @@
             font-weight: normal;
             font-style: normal;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 
@@ -119,7 +124,7 @@
             <label for="bgColor">背景颜色:</label>
             <input type="color" id="bgColor" value="#1ccc5b">
         </div>
-        <div class="color-picker">
+        <div class="color-picker" id="textColorPicker">
             <label for="textColor">文字颜色:</label>
             <input type="color" id="textColor" value="#000000">
         </div>
@@ -144,6 +149,7 @@
         const exportFormatSelect = document.querySelector("#exportFormat");
         // const exportBtn = document.querySelector("#exportBtn");
         const avatar = document.querySelector("#avatar");
+        const textColorPickerDiv = document.querySelector("#textColorPicker");
 
         let bgColor = bgColorPicker.value;
         let textColor = textColorPicker.value;
@@ -170,8 +176,10 @@
 
         autoTextColorCheckbox.addEventListener('change', function() {
             if (this.checked) {
+                textColorPickerDiv.classList.add("hidden");
                 updateTextColor();
             } else {
+                textColorPickerDiv.classList.remove("hidden");
                 avatar.style.color = textColorPicker.value;
             }
         });
@@ -207,7 +215,7 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             ctx.font = "42px jammono";
-            ctx.fillStyle = textColor;
+            ctx.fillStyle = avatar.style.color;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             const lines = ["obscure", "freeman"];
