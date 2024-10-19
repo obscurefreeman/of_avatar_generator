@@ -22,14 +22,23 @@
             height: 200px;
             border-radius: 10%;
             background-color: #1ccc5b;
-            color: #000;
+            color: #000000;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 42px;
             margin-bottom: 20px;
             line-height: 0.9; 
+            /* align-items: flex-start; */
+            /* padding-top: 10px;
+            position: relative; */
+            /* top: 66.67px; */
         }
+        /* .avatar::before {
+            content: "obscure\nfreeman";
+            top: 10px;
+            justify-content: center;
+        } */
         .color-picker {
             margin-bottom: 10px;
         }
@@ -52,7 +61,7 @@
         </div>
         <div class="color-picker">
             <label for="textColor">文字颜色:</label>
-            <input type="color" id="textColor" value="#000">
+            <input type="color" id="textColor" value="#000000">
         </div>
         <button id="exportBtn">导出头像</button>
     </div>
@@ -94,10 +103,10 @@
             ctx.fillStyle = textColor;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.lineWidth = 0.9;
+            // ctx.lineWidth = 0.9;
             const lines = ["obscure", "freeman"];
             lines.forEach((line, index) => {
-                ctx.fillText(line, canvas.width / 2, canvas.height / 2 + (index - 0.5) * 48);
+                ctx.fillText(line, canvas.width / 2, canvas.height / 2 + (index - 0.5) * 36);
             });
 
             const dataURL = canvas.toDataURL("image/png");
