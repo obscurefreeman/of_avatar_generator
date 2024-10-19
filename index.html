@@ -36,7 +36,7 @@
             justify-content: center;
             align-items: center;
             font-size: 42px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             line-height: 0.9; 
             /* align-items: flex-start; */
             /* padding-top: 10px; */
@@ -44,6 +44,16 @@
             /* top: 66.67px; */
             
             padding-bottom: 10px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .avatar:hover {
+            transform: scale(1.1) rotate(1deg);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .avatar:active {
+            transform: scale(0.95); /* 鼠标点击时缩小 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 鼠标点击时的投影 */
         }
         /* .avatar::before {
             content: "obscure\nfreeman";
@@ -68,16 +78,18 @@
         #exportBtn {
             font-size: 18px;
             padding: 10px 20px;
-            background-color: #1a73e8;
+            background-color: #1ccc5b;
             color: #ffffff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
             margin-top: 10px;
+            transition: transform 0.3s ease;
         }
         #exportBtn:hover {
-            background-color: #0047b3;
+            background-color: #138d3e;
+            transform: scale(1.1);
         }
 
         #exportBtn:active {
@@ -118,6 +130,7 @@
         const bgColorPicker = document.querySelector("#bgColor");
         const textColorPicker = document.querySelector("#textColor");
         const exportFormatSelect = document.querySelector("#exportFormat");
+        const exportBtn = document.querySelector("#exportBtn");// 按钮的颜色与背景颜色一致
 
         let bgColor = bgColorPicker.value;
         let textColor = textColorPicker.value;
@@ -126,18 +139,23 @@
 
         avatar.style.backgroundColor = bgColor;
         avatar.style.color = textColor;
+        exportBtn.style.backgroundColor = bgColor;// 按钮的颜色与背景颜色一致
+        exportBtn.style.color = textColor;
 
         bgColorPicker.addEventListener('input', function() {
             bgColor = this.value;
             avatar.style.backgroundColor = bgColor;
+            exportBtn.style.backgroundColor = bgColor; //监听1
         });
 
         textColorPicker.addEventListener('input', function() {
             textColor = this.value;
             avatar.style.color = textColor;
+            exportBtn.style.color = textColor; //监听2
         });
+        
 
-        const exportBtn = document.querySelector("#exportBtn");
+        
 
         exportBtn.addEventListener("click", function() {
             const canvas = document.createElement("canvas");
