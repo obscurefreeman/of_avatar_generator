@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>头像生成器</title>
     <style>
+
         body {
-            font-family: 'jammono';
+            font-family: jammono;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -16,13 +17,14 @@
         }
         .avatar-generator {
             text-align: center;
+            /* padding-top: 100px; */
             justify-content: center;
             align-items: center;
             height: 100vh;
             flex-direction: column;
             width: 60%;
             display: flex;
-            background-color: #171717;
+            background-color: #171717
         }
         .avatar {
             width: 200px;
@@ -35,17 +37,19 @@
             align-items: center;
             font-size: 42px;
             margin-bottom: 20px;
-            line-height: 0.9;
+            line-height: 0.9; 
+            /* align-items: flex-start; */
+            /* padding-top: 10px; */
+            /* position: relative; */
+            /* top: 66.67px; */
+            
             padding-bottom: 10px;
         }
-        .avatar.background-dot {
-            background-image: radial-gradient(circle, #fff 10%, transparent 10%), radial-gradient(circle, #fff 10%, transparent 10%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-        }
-        .avatar.background-sepia {
-            filter: sepia(100%);
-        }
+        /* .avatar::before {
+            content: "obscure\nfreeman";
+            top: 10px;
+            justify-content: center;
+        } */
         .color-picker {
             margin-bottom: 10px;
         }
@@ -80,14 +84,6 @@
                 <option value="image/jpeg">JPEG</option>
             </select>
         </div>
-        <div class="export-options">
-            <label for="bgEffect">背景效果:</label>
-            <select id="bgEffect">
-                <option value="none">无</option>
-                <option value="dot">波点</option>
-                <option value="sepia">半调</option>
-            </select>
-        </div>
         <button id="exportBtn">导出头像</button>
     </div>
 
@@ -95,7 +91,6 @@
         const bgColorPicker = document.querySelector("#bgColor");
         const textColorPicker = document.querySelector("#textColor");
         const exportFormatSelect = document.querySelector("#exportFormat");
-        const bgEffectSelect = document.querySelector("#bgEffect");
 
         let bgColor = bgColorPicker.value;
         let textColor = textColorPicker.value;
@@ -115,15 +110,6 @@
             avatar.style.color = textColor;
         });
 
-        bgEffectSelect.addEventListener('change', function() {
-            avatar.className = 'avatar';
-            if (this.value === 'dot') {
-                avatar.classList.add('background-dot');
-            } else if (this.value === 'sepia') {
-                avatar.classList.add('background-sepia');
-            }
-        });
-
         const exportBtn = document.querySelector("#exportBtn");
 
         exportBtn.addEventListener("click", function() {
@@ -139,6 +125,7 @@
             ctx.fillStyle = textColor;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
+            // ctx.lineWidth = 0.9;
             const lines = ["obscure", "freeman"];
             lines.forEach((line, index) => {
                 ctx.fillText(line, canvas.width / 2, canvas.height / 2 + (index - 0.5) * 36 - 3);
