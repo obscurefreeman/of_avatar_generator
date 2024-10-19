@@ -13,10 +13,10 @@
             height: 100vh;
             background-color: #252525;
             color: #fff;
-            overflow: hidden; /* 隐藏页面溢出部分 */
+            /* overflow: hidden;  */
         }
 
-        /* 添加动态背景 */
+
         #particles-js {
             position: absolute;
             width: 100%;
@@ -30,11 +30,12 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
-            width: 60%;
+            width: 50%;
+            min-width: 500px;
             display: flex;
             background-color: #171717;
-            position: relative; /* 相对定位，使粒子效果覆盖在此容器上 */
-            z-index: 1; /* 确保此容器在粒子效果之上 */
+            position: relative;
+            z-index: 1;
         }
         .avatar {
             width: 200px;
